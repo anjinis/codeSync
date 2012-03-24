@@ -108,12 +108,10 @@ int NearestNeighborDirectory::insert_rec( Node*& currentNodePtr, const double *p
 	
 	if( pos[currentSplitPlane] < node->m_Location[currentSplitPlane] )
 	{
-		//std::cout<<"going left " <<currentNodePtr->GetName()<<"\t";
 		return insert_rec( currentNodePtr->m_left, pos, name, newSplitPlane );
 	}
 	else
 	{
-		//std::cout<<"going right " <<currentNodePtr->GetName()<<"\t";
 		return insert_rec( currentNodePtr->m_right, pos, name, newSplitPlane );
 	}
 }
@@ -128,8 +126,6 @@ void NearestNeighborDirectory::Insert( double x, double y, std::string name )
 	double locationBuffer[2];
 	locationBuffer[0] = x;
 	locationBuffer[1] = y;
-	
-	//std::cout<<"\n inserting " <<name<<"\n";
 	
 	insert_rec( m_tree->root, locationBuffer, name, INITIAL_NO_DIRECTION );
 }
@@ -222,15 +218,9 @@ void NearestNeighborDirectory::FindNearest( Node* currentNodePtr, Node* toComput
 		int sp_other = ( sp + 1 ) % 2;
 		
 		double y1 = toComputeNNDFor->GetLocation(sp_other);
-		//double y2 = currentNodePtr->GetLocation(sp_other);
 		double yworst = toComputeNNDFor->GetCurrentWorstLoc( )[ sp_other ];
-
-		
-	//	shouldCheckOtherBranch = ((x1 - x2)*(x1 - x2) ) < ( (x1 - xworst)*(x1 - xworst) + (y1 -yworst)*(y1 -yworst) );
 	
 		shouldCheckOtherBranch = fabs(x1 - x2) < ( fabs(x1 - xworst) + fabs(y1 -yworst) );
-		
-		//shouldCheckOtherBranch = (x1 - x2) < (x1 - x3);
 		
 		if( currentNodePtr == m_tree->root )
 		{
@@ -274,7 +264,6 @@ void NearestNeighborDirectory::FindNearest( Node* currentNodePtr, Node* toComput
 		{
 			if( currentNodePtr->m_left != NULL )
 			{
-				//std::cout<< "checking left for "<< toComputeNNDFor->GetName( )<<"\t "<< currentNodePtr->GetName()<<"\n";
 				FindNearest( currentNodePtr->m_left, toComputeNNDFor );
 			}
 		}
@@ -282,7 +271,6 @@ void NearestNeighborDirectory::FindNearest( Node* currentNodePtr, Node* toComput
 		{
 			if( currentNodePtr->m_right != NULL )
 			{
-				//std::cout<< "checking right for"<< toComputeNNDFor->GetName( )<<"\n";
 				FindNearest( currentNodePtr->m_right, toComputeNNDFor );
 			}
 		}

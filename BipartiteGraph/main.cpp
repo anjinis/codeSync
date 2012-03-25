@@ -38,8 +38,7 @@ int main ( int argc, char * const argv[ ] )
 {
 	try
 	{
-		std::ifstream myfile ( argv[1] );
-		//std::ifstream myfile( "/Users/online2.txt" );
+		std::ifstream myfile ( argv[1] /*input file name*/ );
 		
 		Bipartite puzzle_solver;
 		int isInitialized = false;
@@ -54,11 +53,8 @@ int main ( int argc, char * const argv[ ] )
 		
 			if( populationCount == 0 )
 			{
-				//std::cout <<"\n Failed to get first Line End of Application \n";
 				return 1;
 			}
-		
-			//std::cout<< "Total population is: "<< populationCount <<"\n";
 		
 			// read totalPopulation chunks of data
 			for (int i = 0; i < populationCount ; i++ )
@@ -87,8 +83,6 @@ int main ( int argc, char * const argv[ ] )
 				std::string accuserName = tokensFirstChunk.back( );
 				tokensFirstChunk.pop_back( );
 			
-				//std::cout<< "Accuser is :"<< accuserName <<" \t number of accused = "<< numberOfAccused <<"\n";
-			
 				std::vector<std::string> accusedList;
 			
 				for (int accusedCount = 0; accusedCount < numberOfAccused; ++accusedCount ) 
@@ -97,7 +91,6 @@ int main ( int argc, char * const argv[ ] )
 					std::getline(myfile, line);
 					
 					accusedList.push_back( line );
-					//std::cout<< " \n \t Accused  :"<< line <<"\n";
 				}
 			
 				if( isInitialized == false )
